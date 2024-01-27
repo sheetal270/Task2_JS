@@ -3,16 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <title>Traffic Light</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,13 +15,16 @@
             height: 100vh;
             background: url('./image/RD.jpg') no-repeat center center fixed;
             background-size: cover;
+            margin: 0;
         }
- #traffic-light-box {
+
+        #traffic-light-box {
             top: 0;
             padding: 7px;
             background-color: #ddd;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgb(190,190,190);
+            box-shadow: 0 0 10px rgb(190, 190, 190);
+            margin-top: 36px;
         }
 
         #traffic-light {
@@ -48,9 +46,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: 24px;
             color: white;
         }
+
         #red-light {
             background-color: #808080;
         }
@@ -69,72 +68,67 @@
             font-size: 20px;
             cursor: pointer;
         }
-       
-    
-
-
     </style>
 </head>
 <body>
-<div id="traffic-light-box">
-<div id="traffic-light">
-    <div id="red-light" class="light" onclick="toggleLight('red-light')"></div>
-    <div id="yellow-light" class="light" onclick="toggleLight('yellow-light')"></div>
-    <div id="green-light" class="light" onclick="toggleLight('green-light')"></div>
-</div>
-</div>
+    <div id="traffic-light-box">
+        <div id="traffic-light">
+            <div id="red-light" class="light" onclick="toggleLight('red-light')"></div>
+            <div id="yellow-light" class="light" onclick="toggleLight('yellow-light')"></div>
+            <div id="green-light" class="light" onclick="toggleLight('green-light')"></div>
+        </div>
+    </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Set red light on by default
-        document.getElementById('red-light').style.backgroundColor = '#ff0000';
-    });
-
-    var lightColors = ['red', 'yellow', 'green'];
-    var lightIndex = 0;
-    var countdownInterval;
-
-    function toggleLight(lightId) {
-        clearInterval(countdownInterval); // Clear previous countdown interval
-        var light = document.getElementById(lightId);
-
-        // Reset all lights to gray
-        document.querySelectorAll('.light').forEach(function (l) {
-            l.style.backgroundColor = '#808080';
-            l.innerText = '';
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set red light on by default
+            toggleLight('red-light');
         });
 
-        light.style.backgroundColor = getColor(lightId);
-        startCountdown(light);
-    }
+        var lightColors = ['red', 'yellow', 'green'];
+        var lightIndex = 0;
+        var countdownInterval;
 
-    function startCountdown(light) {
-        var seconds = 30;
-        countdownInterval = setInterval(function () {
-            light.innerText = seconds;
-            seconds--;
+        function toggleLight(lightId) {
+            clearInterval(countdownInterval); // Clear previous countdown interval
+            var light = document.getElementById(lightId);
 
-            if (seconds < 0) {
-                clearInterval(countdownInterval);
-                lightIndex = (lightIndex + 1) % lightColors.length;
-                toggleLight(lightColors[lightIndex] + '-light');
-            }
-        }, 1000);
-    }
+            // Reset all lights to gray
+            document.querySelectorAll('.light').forEach(function (l) {
+                l.style.backgroundColor = '#808080';
+                l.innerText = '';
+            });
 
-    function getColor(lightId) {
-        switch (lightId) {
-            case 'red-light':
-                return '#ff0000';
-            case 'yellow-light':
-                return '#ffd700';
-            case 'green-light':
-                return '#00ff00';
-            default:
-                return '#808080';
+            light.style.backgroundColor = getColor(lightId);
+            startCountdown(light);
         }
-    }
-</script>
 
+        function startCountdown(light) {
+            var seconds = 30;
+            countdownInterval = setInterval(function () {
+                light.innerText = seconds;
+                seconds--;
+
+                if (seconds < 0) {
+                    clearInterval(countdownInterval);
+                    lightIndex = (lightIndex + 1) % lightColors.length;
+                    toggleLight(lightColors[lightIndex] + '-light');
+                }
+            }, 1000);
+        }
+
+        function getColor(lightId) {
+            switch (lightId) {
+                case 'red-light':
+                    return '#ff0000';
+                case 'yellow-light':
+                    return '#ffd700';
+                case 'green-light':
+                    return '#00ff00';
+                default:
+                    return '#808080';
+            }
+        }
+    </script>
 </body>
 </html>
