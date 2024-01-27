@@ -85,6 +85,11 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Set red light on by default
+        document.getElementById('red-light').style.backgroundColor = '#ff0000';
+    });
+
     var lightColors = ['red', 'yellow', 'green'];
     var lightIndex = 0;
     var countdownInterval;
